@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ReponseAjax } from '../interfaces/reponseajax.interface';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 export class LoginComponent implements OnInit {
 
   model: any = {};
-  //private _httpClient: HttpClient;
+  // private _httpClient: HttpClient;
 
   optionRequete = {
   headers: new HttpHeaders({
@@ -31,19 +32,24 @@ constructor(
 
 
 
-    this._httpClient.get('http://localhost/phpmybudget/index.php?domaine=technique&service=connexion&nom='+this.model.username+'&motDePasse='+this.model.motDePasse )
-        .subscribe(result => {
+    // tslint:disable-next-line: max-line-length
+    this._httpClient.request<ReponseAjax[]>('GET', 'http://localhost/phpmybudget/api.php?domaine=technique&service=gettoken&nom=' + this.model.username + '&motDePasse=' + this.model.password, {
+      responseType:"json"} )
+      .subscribe(retour => {
+        let reponse: ReponseAjax;
+        reponse = retour[0];
+        if (reponse.status === 'OK') {
+          localStorage.setItem('token', reponse.valeur);
+          this.router.navigate(['/listecomptes']);
+        } else {
+          alert(reponse.message);
+        }
+    });
+  }
 
-                //this.bookCount = googleVolumeListResponse.totalItems;
-                alert(result);
-                // @TODO: this.bookList = ...
-
-            });
-
-
-    // Vérifier que login/mdp sont correctes, par exemple par une requête à un service REST
-    localStorage.setItem('user', JSON.stringify({login : this.model.username}));
-    this.router.navigate(['/listecomptes']);
+  recupereToken(data) {
+    alert(data);
+    return 0;
   }
 
 }

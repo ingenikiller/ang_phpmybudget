@@ -1,1 +1,95 @@
 <app-menu></app-menu>
+
+<ng-template #content let-modal>
+  <form>
+
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+
+      <div class="container popup_operation">
+        <div class="form-group row">
+          <label for="numeroCompte" class="col-sm-6 form-control-label">Numéro compte</label>
+          <div class="col-sm-6">
+            <input class="form-control" size="12" name="numeroCompte" id="numeroCompte" tabindex="10"
+              required="required" [(ngModel)]="model.numeroCompte" #numeroCompte="ngModel"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="libelle" class="col-sm-6 form-control-label">Description</label>
+          <div class="col-sm-6">
+            <input class="form-control" type="text" name="libelle" id="libelle" size="11" maxlength="40"
+              tabindex="20" [(ngModel)]="model.libelle" #libelle="ngModel"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="solde" class="col-sm-6 form-control-label">Solde historique</label>
+          <div class="col-sm-6">
+            <input class="form-control numerique" type="numeric" name="solde" id="solde" size="10" tabindex="30"
+              required="required" [(ngModel)]="model.solde" #solde="ngModel"/>
+          </div>
+        </div>
+        <!--div class="row justify-content-md-center">
+          <div class="col-lg-offset-4 col-lg-4" style="text-align:center;">
+            <button type="submit" class="btn btn-primary">Valider</button>
+          </div>
+        </div-->
+
+      </div>
+
+
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div>
+</form>
+</ng-template>
+
+
+<div class="row justify-content-md-center">
+  <div class="col-lg-10">
+    <h1>Liste des comptes</h1>
+
+    <button type="button" class="btn btn-primary" id="editerCompte" name="editerCompte" onclick="editerCompte('');">
+      <span class="oi oi-plus"></span>
+    </button>
+    <br />
+    <table class="table table-striped table-bordered" name="tableauResultat" id="tableauResultat">
+      <thead>
+        <tr>
+          <th class="text-center">Compte</th>
+          <th class="text-center">Description</th>
+          <th class="text-center">Solde historique</th>
+          <th class="text-center">Solde</th>
+          <th class="text-center">Editer</th>
+          <th class="text-center">Opérations</th>
+          <th class="text-center">Opé récurrentes</th>
+          <th class="text-center">Statistiques</th>
+          <th class="text-center">Prévisions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let compte of listeCompte; let i=index'>
+          <td>{{compte.numeroCompte}}</td>
+          <td>{{compte.libelle}}</td>
+          <td class="text-right">{{compte.solde}}</td>
+          <td class="text-right">{{ compte.solde*1 + compte.associatedObjet[0].tabResult[0].somme*1 }}</td>
+          <td class="text-center">
+            <!--a href="javascript:void(0)" (onclick)=open(content)><span class="oi oi-pencil"></span></a-->
+            <button class="btn btn-outline-primary" (click)="open(content, i)"><span
+                class="oi oi-pencil"></span></button>
+          </td>
+          <td class="text-center">btn opérations</td>
+          <td class="text-center">btn opé rec</td>
+          <td class="text-center">btn Stats</td>
+          <td class="text-center">btn Prévisions</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

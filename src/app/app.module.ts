@@ -5,24 +5,30 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule  } from '@angular/common/http';
 import { MenuComponent } from './menu/menu.component';
 import { ListecomptesComponent } from './listecomptes/listecomptes.component';
 
 import { ComptesService } from './services/comptes.service';
+import { CompteComponent } from './compte/compte.component';
+import { CompteEditionComponent } from './compte-edition/compte-edition.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MenuComponent,
-    ListecomptesComponent
+    ListecomptesComponent,
+    CompteComponent,
+    CompteEditionComponent
   ],
   imports: [
     FormsModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [
     ComptesService
