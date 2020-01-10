@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ComptesService } from '../services/comptes.service';
-//import { CompteComponent } from '../compte/compte.component';
-import * as $ from 'jquery';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 import { Subscription } from 'rxjs/Subscription';
 import { Compte } from '../objets/compte';
@@ -50,7 +48,7 @@ export class ListecomptesComponent implements OnInit {
   }
 
   open(content, i: string) {
-    let compte: Compte = this.listeCompte[i];
+    const compte: Compte = this.listeCompte[i];
     this.model.numeroCompte = compte.numeroCompte;
     this.model.libelle = compte.libelle;
     this.model.solde = compte.solde;

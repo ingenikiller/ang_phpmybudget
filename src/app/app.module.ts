@@ -10,9 +10,10 @@ import { MenuComponent } from './menu/menu.component';
 import { ListecomptesComponent } from './listecomptes/listecomptes.component';
 
 import { ComptesService } from './services/comptes.service';
-import { CompteComponent } from './compte/compte.component';
 import { CompteEditionComponent } from './compte-edition/compte-edition.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ListefluxComponent } from './listeflux/listeflux.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -20,8 +21,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LoginComponent,
     MenuComponent,
     ListecomptesComponent,
-    CompteComponent,
-    CompteEditionComponent
+    CompteEditionComponent,
+    ListefluxComponent,
+    PaginationComponent
   ],
   imports: [
     FormsModule,
