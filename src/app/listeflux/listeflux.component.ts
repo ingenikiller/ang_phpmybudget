@@ -64,7 +64,7 @@ export class ListefluxComponent implements OnInit {
   }
 
   open(content, fluxId: string) {
-    if(fluxId === '0') {
+    if (fluxId === '0') {
       //
     } else {
       //

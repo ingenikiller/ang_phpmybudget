@@ -11,7 +11,7 @@ export class FluxService {
 
   // listeFlux: Flux[];
 
-  constructor(private _httpClient : HttpClient) { }
+  constructor(private _httpClient: HttpClient) { }
 
   getListeFlux(numeroPage: number, comptePrincipal: string, compteDestination: string ): Observable<FluxListeInterface[]> {
     const token = localStorage.getItem('token');
@@ -27,7 +27,7 @@ export class FluxService {
     return this._httpClient.get<FluxListeInterface[]>(url);
   }
 
-  getOne(fluxId: string): Observable<Flux[]>{
+  getOne(fluxId: string): Observable<Flux[]> {
     const token = localStorage.getItem('token');
     let url = 'http://localhost/phpmybudget/api.php?domaine=flux&service=getone&token=' + token;
     url += '&fluxId=' + fluxId;
