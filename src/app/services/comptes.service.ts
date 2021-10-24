@@ -31,12 +31,24 @@ export class ComptesService {
   getListeCompte() {
     const token = localStorage.getItem('token');
     const url = 'http://localhost/phpmybudget/api.php?domaine=compte&service=getliste&token=' + token;
-    this._httpClient.get<CompteListeInterface[]>(url)
+    this._httpClient.get<CompteListeInterface>(url)
         .subscribe(resultat => {
+          if (resultat.status === 'false') {
 
+          } else {
+            //alert('retour OK');
+          }
+          this.listeCompte = resultat.valeur[0].tabResult;
+          console.log('nb comptes:' + this.listeCompte.length);
+          this.emitCompteListeSubject();
+          /*if (resultat[0].statutService === 'false') {
+
+            } else {
+              alert('retour OK');
+            }
             this.listeCompte = resultat[0].tabResult;
             console.log('nb comptes:' + this.listeCompte.length);
-            this.emitCompteListeSubject();
+            this.emitCompteListeSubject();*/
         });
   }
 

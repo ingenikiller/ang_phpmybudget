@@ -40,7 +40,7 @@ export class ListefluxComponent implements OnInit {
   ngOnInit() {
     this.compteService.retourneListeCompte()
       .subscribe(retour => {
-        this.listeComptes = retour[0].tabResult;
+        this.listeComptes = retour[0].valeur[0].tabResult;
       });
 
     this.segmentService.getModePaiement()

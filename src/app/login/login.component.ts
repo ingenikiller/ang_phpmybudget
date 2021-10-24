@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ReponseAjax } from '../interfaces/reponseajax.interface';
+import { LoginReponse } from '../interfaces/login.interface';
 
 @Component({
   selector: 'app-login',
@@ -33,11 +34,11 @@ constructor(
 
 
     // tslint:disable-next-line: max-line-length
-    this._httpClient.request<ReponseAjax[]>('GET', 'http://localhost/phpmybudget/api.php?domaine=technique&service=gettoken&nom=' + this.model.username + '&motDePasse=' + this.model.password, {
+    this._httpClient.request<LoginReponse>('GET', 'http://localhost/phpmybudget/api.php?domaine=technique&service=gettoken&nom=' + this.model.username + '&motDePasse=' + this.model.password, {
       responseType:"json"} )
       .subscribe(retour => {
         let reponse: ReponseAjax;
-        reponse = retour[0];
+        reponse = retour.valeur[0];
         if (reponse.status === 'OK') {
           localStorage.setItem('token', reponse.valeur);
           this.router.navigate(['/listecomptes']);
